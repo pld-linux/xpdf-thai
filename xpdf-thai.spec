@@ -2,7 +2,7 @@ Summary:	TIS-620 encoding support for xpdf
 Summary(pl):	Wsparcie kodowania TIS-620 dla xpdf
 Name:		xpdf-thai
 Version:	1.0
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}.tar.gz
@@ -57,10 +57,12 @@ else
 fi
 
 %preun
-umask 022
-grep -v 'TIS-620\.unicodeMap' /etc/xpdfrc.new > /etc/xpdfrc
-grep -v 'Thai\.nameToUnicode' /etc/xpdfrc > /etc/xpdfrc.new
-rm -f /etc/xpdfrc.new
+if [ "$1" = "0" ]; then
+	umask 022
+	grep -v 'TIS-620\.unicodeMap' /etc/xpdfrc.new > /etc/xpdfrc
+	grep -v 'Thai\.nameToUnicode' /etc/xpdfrc > /etc/xpdfrc.new
+	rm -f /etc/xpdfrc.new
+fi
 
 %files
 %defattr(644,root,root,755)
