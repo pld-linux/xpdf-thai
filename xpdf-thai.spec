@@ -7,8 +7,10 @@ License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}.tar.gz
 URL:		http://www.foolabs.com/xpdf/
-Requires:	xpdf
 Requires(post,preun):	grep
+Requires(post,preun):	xpdf
+Requires(preun):	fileutils
+Requires:	xpdf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -37,22 +39,25 @@ install *.nameToUnicode $RPM_BUILD_ROOT%{_datadir}/xpdf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
 %post
+umask 022
 if [ ! -f /etc/xpdfrc ]; then
 	echo 'unicodeMap	TIS-620	/usr/share/xpdf/TIS-620.unicodeMap' >> /etc/xpdfrc
 	echo 'nameToUnicode		/usr/share/xpdf/Thai.nameToUnicode' >> /etc/xpdfrc
 else
- if ! grep -q TIS-620.unicodeMap /etc/xpdfrc; then
+ if ! grep -q 'TIS-620\.unicodeMap' /etc/xpdfrc; then
 	echo 'unicodeMap	TIS-620	/usr/share/xpdf/TIS-620.unicodeMap' >> /etc/xpdfrc
  fi
- if ! grep -q Thai.nameToUnicode /etc/xpdfrc; then
+ if ! grep -q 'Thai\.nameToUnicode' /etc/xpdfrc; then
 	echo 'nameToUnicode		/usr/share/xpdf/Thai.nameToUnicode' >> /etc/xpdfrc
  fi
 fi
 
 %preun
-grep -v TIS-620.unicodeMap /etc/xpdfrc.new > /etc/xpdfrc
-grep -v Thai.nameToUnicode /etc/xpdfrc > /etc/xpdfrc.new
+umask 022
+grep -v 'TIS-620\.unicodeMap' /etc/xpdfrc.new > /etc/xpdfrc
+grep -v 'Thai\.nameToUnicode' /etc/xpdfrc > /etc/xpdfrc.new
 rm -f /etc/xpdfrc.new
 
 %files
