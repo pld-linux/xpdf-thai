@@ -11,7 +11,6 @@ Requires:	xpdf
 Requires(post,preun):	grep
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-
 %description
 The Xpdf language support packages include CMap files, text encodings,
 and various other configuration information necessary or useful for
@@ -40,20 +39,20 @@ install *.nameToUnicode $RPM_BUILD_ROOT%{_datadir}/xpdf
 rm -rf $RPM_BUILD_ROOT
 %post
 if [ ! -f /etc/xpdfrc ]; then
-	echo 'unicodeMap	TIS-620	/usr/X11R6/share/xpdf/TIS-620.unicodeMap' >> /etc/xpdfrc
-	echo 'nameToUnicode		/usr/X11R6/share/xpdf/Thai.nameToUnicode' >> /etc/xpdfrc
+	echo 'unicodeMap	TIS-620	/usr/share/xpdf/TIS-620.unicodeMap' >> /etc/xpdfrc
+	echo 'nameToUnicode		/usr/share/xpdf/Thai.nameToUnicode' >> /etc/xpdfrc
 else
- if ! grep -q /usr/X11R6/share/xpdf/TIS-620.unicodeMap /etc/xpdfrc; then
-	echo 'unicodeMap	TIS-620	/usr/X11R6/share/xpdf/TIS-620.unicodeMap' >> /etc/xpdfrc
+ if ! grep -q TIS-620.unicodeMap /etc/xpdfrc; then
+	echo 'unicodeMap	TIS-620	/usr/share/xpdf/TIS-620.unicodeMap' >> /etc/xpdfrc
  fi
- if ! grep -q /usr/X11R6/share/xpdf/Thai.nameToUnicode /etc/xpdfrc; then
-	echo 'nameToUnicode		/usr/X11R6/share/xpdf/Thai.nameToUnicode' >> /etc/xpdfrc
+ if ! grep -q Thai.nameToUnicode /etc/xpdfrc; then
+	echo 'nameToUnicode		/usr/share/xpdf/Thai.nameToUnicode' >> /etc/xpdfrc
  fi
 fi
 
 %preun
-grep -v /usr/X11R6/share/xpdf/TIS-620.unicodeMap /etc/xpdfrc.new > /etc/xpdfrc
-grep -v /usr/X11R6/share/xpdf/Thai.nameToUnicode /etc/xpdfrc > /etc/xpdfrc.new
+grep -v TIS-620.unicodeMap /etc/xpdfrc.new > /etc/xpdfrc
+grep -v Thai.nameToUnicode /etc/xpdfrc > /etc/xpdfrc.new
 rm -f /etc/xpdfrc.new
 
 %files
