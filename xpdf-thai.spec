@@ -6,7 +6,7 @@ Release:	3
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}.tar.gz
-# Source0-md5:	9af495766ee4eaf3411d1fa74560f0ec
+# Source0-md5:	96e058c1b0429ae1ba0b50f1784b0985
 URL:		http://www.foolabs.com/xpdf/
 Requires(post,preun):	grep
 Requires(post,preun):	xpdf
@@ -59,8 +59,8 @@ fi
 %preun
 if [ "$1" = "0" ]; then
 	umask 022
-	grep -v 'TIS-620\.unicodeMap' /etc/xpdfrc.new > /etc/xpdfrc
-	grep -v 'Thai\.nameToUnicode' /etc/xpdfrc > /etc/xpdfrc.new
+	grep -v 'TIS-620\.unicodeMap' /etc/xpdfrc > /etc/xpdfrc.new
+	grep -v 'Thai\.nameToUnicode' /etc/xpdfrc.new > /etc/xpdfrc
 	rm -f /etc/xpdfrc.new
 fi
 
