@@ -2,7 +2,7 @@ Summary:	TIS-620 encoding support for xpdf
 Summary(pl.UTF-8):	Wsparcie kodowania TIS-620 dla xpdf
 Name:		xpdf-thai
 Version:	1.0
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}.tar.gz
