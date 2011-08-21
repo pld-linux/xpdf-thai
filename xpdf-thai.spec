@@ -1,12 +1,12 @@
 Summary:	TIS-620 encoding support for xpdf
-Summary(pl.UTF-8):	Wsparcie kodowania TIS-620 dla xpdf
+Summary(pl.UTF-8):	Obsługa kodowania TIS-620 dla xpdf
 Name:		xpdf-thai
-Version:	1.0
-Release:	4
-License:	GPL
+Version:	20110815
+Release:	1
+License:	GPL v2 or GPL v3
 Group:		X11/Applications
-Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}.tar.gz
-# Source0-md5:	96e058c1b0429ae1ba0b50f1784b0985
+Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-2011-aug-15.tar.gz
+# Source0-md5:	57fc888436f19cdf4a68ef17c17b86b7
 URL:		http://www.foolabs.com/xpdf/
 Requires(post,preun):	grep
 Requires(post,preun):	xpdf
@@ -25,7 +25,7 @@ Thai PDF files.
 %description -l pl.UTF-8
 Pakiety wspierające języki Xpdf zawierają pliki CMap, kodowania oraz
 różne inne informacje konfiguracyjne niezbędne bądź przydatne przy
-określonych zestawach znaków. (Nie zawierają żadnych fontów).
+określonych zestawach znaków (nie zawierają żadnych fontów).
 Ten pakiet zawiera pliki potrzebne do używania narzędzi Xpdf z
 tajskimi plikami PDF.
 
@@ -67,4 +67,5 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc README add-to-xpdfrc
-%{_datadir}/xpdf/*
+%{_datadir}/xpdf/TIS-620.unicodeMap
+%{_datadir}/xpdf/Thai.nameToUnicode
